@@ -13,4 +13,6 @@ function _init()
 	b_x2=128
 	b_y1=0
 	b_y2=128
+
+	-- test change --
 end
