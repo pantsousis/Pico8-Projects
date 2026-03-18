@@ -6,4 +6,5 @@ function _draw()
 	draw_player()
 	draw_rocks()
 	-- print(position_x .. " - " .. position_y)
+	print(#bullets)
 end

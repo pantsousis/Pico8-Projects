@@ -6,7 +6,6 @@ bullet={
 
 is_save_bullet=true
 bullet_speed=4
-bullet_num=0
 bullets={}
 shoot_from_position=0
 attack_speed=2
@@ -21,7 +20,6 @@ end
 
 function save_bullet()
 	if btn(btn_z) and is_save_bullet then
-		bullet_num+=1
 		pos_x=0
 		pos_y=position_y-6
 		
@@ -30,7 +28,7 @@ function save_bullet()
 		else
 		 pos_x=position_x+2
 		end
-		bullets[bullet_num]=create_bullet(pos_x, pos_y)
+		bullets[#bullets+1]=create_bullet(pos_x, pos_y)
 		is_save_bullet=false
 		change_shoot_position()
 	end
@@ -41,16 +39,16 @@ function save_bullet()
 end
 
 function draw_bullets()
-	if bullet_num >= 1 then
-		for i=1,bullet_num do
+	if #bullets >= 1 then
+		for i=1,#bullets do
 			spr(2, bullets[i].x, bullets[i].y)
 		end
 	end
 end
 
 function update_bullet_position()
-	if bullet_num >= 1 then
-		for i=1,bullet_num do
+	if #bullets >= 1 then
+		for i=1,#bullets do
 			pos_x=bullets[i].x
 			pos_y=bullets[i].y-bullet_speed
 			bullets[i]:move(pos_x, pos_y)

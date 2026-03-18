@@ -1,5 +1,4 @@
 -- rocks --
-rock_num=0
 rocks={}
 rock_spr_num=8
 rock_spr_size_x=8
@@ -25,8 +24,8 @@ function create_rock(pos_x, pos_y)
 end
 
 function draw_rocks()
-	if rock_num >= 1 then
-		for i=1,rock_num do
+	if #rocks >= 1 then
+		for i=1,#rocks do
 			spr(rock_spr_num, rocks[i].x, rocks[i].y)
 		end
 	end
@@ -36,14 +35,13 @@ function spawn_random_rock()
 	if (tick_counter%rock_spawn_rate)==0 then
 		pos_x=rnd(b_x2-rock_spr_size_x)
 		pos_y=b_y1-8
-		rock_num+=1
-		rocks[rock_num]=create_rock(pos_x, pos_y)
+		rocks[#rocks+1]=create_rock(pos_x, pos_y)
 	end	
 end
 
 function move_rocks()
-	if rock_num>=1 then
-		for i=1,rock_num do
+	if #rocks>=1 then
+		for i=1,#rocks do
 			pos_x=rocks[i].x
 			pos_y=rocks[i].y+rock_speed
 			rocks[i]:move(pos_x,pos_y)
