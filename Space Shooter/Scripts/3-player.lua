@@ -1,11 +1,15 @@
--- player movement -
+-- player --
 position_x=(128/2-4)
 position_y=128
-speed=2
+speed=3
 direction_x=0 -- 0 none, 1 right, -1 left
 direction_y=0
 spr_size_x=8
 spr_size_y=8
+
+score=0
+player_health=3
+
 function player_update_main()
 	direction_x=0
 	if btn(btn_right) then

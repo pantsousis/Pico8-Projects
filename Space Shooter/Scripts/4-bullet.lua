@@ -11,9 +11,11 @@ shoot_from_position=0
 attack_speed=2
 bullet_tick_counter=0
 bullet_sound_num=00
+bullet_spr_num=2
 
 function bullet_update_main()
 	update_bullet_tick_counter()
+	remove_bullets()
 	update_bullet_position()
 	save_bullet()
 end
@@ -41,7 +43,9 @@ end
 function draw_bullets()
 	if #bullets >= 1 then
 		for i=1,#bullets do
-			spr(2, bullets[i].x, bullets[i].y)
+			if not bullets[i].deleted then
+				spr(bullet_spr_num, bullets[i].x, bullets[i].y)
+			end
 		end
 	end
 end
@@ -77,7 +81,9 @@ function create_bullet(pos_x, pos_y)
 	return {
 		x=pos_x,
 		y=pos_y,
-		
+		deleted=false,
+		spr_num=bullet_spr_num,
+
 		move = function(self, pos_x, pos_y)
 			self.x=pos_x
 			self.y=pos_y
@@ -87,4 +93,8 @@ end
 
 function play_bullet_sound()
 	sfx(bullet_sound_number)
+end
+
+function remove_bullets()
+	bullets=clear_deleted(bullets)
 end

@@ -1,6 +1,8 @@
 -- boundaries --
 function handle_world_boundary_collisions()
 	player_world_boundary_collision()
+	bullet_world_boundary_collision()
+	rock_world_boundary_collision()
 end
 
 function player_world_boundary_collision()
@@ -37,5 +39,21 @@ function draw_boundaries()
 	
 	for y=b_y1,b_y2 do
 		spr(5, b_x2, y)
+	end
+end
+
+function bullet_world_boundary_collision()
+	for i=1,#bullets do
+		if bullets[i].y < b_y1-8 then
+			bullets[i].deleted = true
+		end
+	end
+end
+
+function rock_world_boundary_collision()
+	for i=1,#rocks do
+		if rocks[i].y > b_y2 then
+			rocks[i]:collide_with_y2_world_boundary()
+		end
 	end
 end
